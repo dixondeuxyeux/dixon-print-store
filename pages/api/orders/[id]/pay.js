@@ -28,4 +28,4 @@ handler.put(async (req, res) => {
   }
 })
 
-export default onError
+export default handler
