@@ -59,7 +59,7 @@ const data = {
     },
     {
       name: 'The Golden Triangle',
-      slug: 'golden-triangle',
+      slug: 'the-golden-triangle',
       category: 'Small World',
       image: '/images/veranasi-ghats.jpg',
       price: 350,

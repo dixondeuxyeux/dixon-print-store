@@ -56,7 +56,7 @@ function reducer(state, action) {
 function UserEdit({ params }) {
   const userId = params.id;
   const { state } = useContext(Store);
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, loadingUpdate}, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
   });
