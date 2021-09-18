@@ -1,8 +1,8 @@
-import axios from 'axios';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer, useState } from 'react';
+import axios from 'axios'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
+import React, { useEffect, useContext, useReducer, useState } from 'react'
 import {
   Grid,
   List,
@@ -15,88 +15,88 @@ import {
   CircularProgress,
   Checkbox,
   FormControlLabel,
-} from '@material-ui/core';
-import { getError } from '../../../utils/error';
-import { Store } from '../../../utils/Store';
-import Layout from '../../../components/Layout';
-import useStyles from '../../../utils/styles';
-import { Controller, useForm } from 'react-hook-form';
-import { useSnackbar } from 'notistack';
+} from '@material-ui/core'
+import { getError } from '../../../utils/error'
+import { Store } from '../../../utils/Store'
+import Layout from '../../../components/Layout'
+import useStyles from '../../../utils/styles'
+import { Controller, useForm } from 'react-hook-form'
+import { useSnackbar } from 'notistack'
 
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      return { ...state, loading: true, error: '' };
+      return { ...state, loading: true, error: '' }
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, error: '' };
+      return { ...state, loading: false, error: '' }
     case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload }
     case 'UPDATE_REQUEST':
-      return { ...state, loadingUpdate: true, errorUpdate: '' };
+      return { ...state, loadingUpdate: true, errorUpdate: '' }
     case 'UPDATE_SUCCESS':
-      return { ...state, loadingUpdate: false, errorUpdate: '' };
+      return { ...state, loadingUpdate: false, errorUpdate: '' }
     case 'UPDATE_FAIL':
-      return { ...state, loadingUpdate: false, errorUpdate: action.payload };
+      return { ...state, loadingUpdate: false, errorUpdate: action.payload }
     case 'UPLOAD_REQUEST':
-      return { ...state, loadingUpload: true, errorUpload: '' };
+      return { ...state, loadingUpload: true, errorUpload: '' }
     case 'UPLOAD_SUCCESS':
       return {
         ...state,
         loadingUpload: false,
         errorUpload: '',
-      };
+      }
     case 'UPLOAD_FAIL':
-      return { ...state, loadingUpload: false, errorUpload: action.payload };
+      return { ...state, loadingUpload: false, errorUpload: action.payload }
 
     default:
-      return state;
+      return state
   }
 }
 
 function UserEdit({ params }) {
-  const userId = params.id;
-  const { state } = useContext(Store);
-  const [{ loading, error, loadingUpdate}, dispatch] = useReducer(reducer, {
+  const userId = params.id
+  const { state } = useContext(Store)
+  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
-  });
+  })
   const {
     handleSubmit,
     control,
     formState: { errors },
     setValue,
-  } = useForm();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const router = useRouter();
-  const classes = useStyles();
-  const { userInfo } = state;
+  } = useForm()
+  const [isAdmin, setIsAdmin] = useState(false)
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const router = useRouter()
+  const classes = useStyles()
+  const { userInfo } = state
 
   useEffect(() => {
     if (!userInfo) {
-      return router.push('/login');
+      return router.push('/login')
     } else {
       const fetchData = async () => {
         try {
-          dispatch({ type: 'FETCH_REQUEST' });
+          dispatch({ type: 'FETCH_REQUEST' })
           const { data } = await axios.get(`/api/admin/users/${userId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
-          });
-          setIsAdmin(data.isAdmin);
-          dispatch({ type: 'FETCH_SUCCESS' });
-          setValue('name', data.name);
+          })
+          setIsAdmin(data.isAdmin)
+          dispatch({ type: 'FETCH_SUCCESS' })
+          setValue('name', data.name)
         } catch (err) {
-          dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+          dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
         }
-      };
-      fetchData();
+      }
+      fetchData()
     }
-  }, []);
+  }, [])
 
   const submitHandler = async ({ name }) => {
-    closeSnackbar();
+    closeSnackbar()
     try {
-      dispatch({ type: 'UPDATE_REQUEST' });
+      dispatch({ type: 'UPDATE_REQUEST' })
       await axios.put(
         `/api/admin/users/${userId}`,
         {
@@ -104,39 +104,39 @@ function UserEdit({ params }) {
           isAdmin,
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
-      );
-      dispatch({ type: 'UPDATE_SUCCESS' });
-      enqueueSnackbar('User updated successfully', { variant: 'success' });
-      router.push('/admin/users');
+      )
+      dispatch({ type: 'UPDATE_SUCCESS' })
+      enqueueSnackbar('User updated successfully', { variant: 'success' })
+      router.push('/admin/users')
     } catch (err) {
-      dispatch({ type: 'UPDATE_FAIL', payload: getError(err) });
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      dispatch({ type: 'UPDATE_FAIL', payload: getError(err) })
+      enqueueSnackbar(getError(err), { variant: 'error' })
     }
-  };
+  }
   return (
     <Layout title={`Edit User ${userId}`}>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
+              <NextLink href='/admin/dashboard' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Admin Dashboard'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
+              <NextLink href='/admin/orders' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Orders'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Products"></ListItemText>
+              <NextLink href='/admin/products' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Products'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/users" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Users"></ListItemText>
+              <NextLink href='/admin/users' passHref>
+                <ListItem selected button component='a'>
+                  <ListItemText primary='Users'></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -146,7 +146,7 @@ function UserEdit({ params }) {
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h1" variant="h1">
+                <Typography component='h1' variant='h1'>
                   Edit User {userId}
                 </Typography>
               </ListItem>
@@ -164,18 +164,18 @@ function UserEdit({ params }) {
                   <List>
                     <ListItem>
                       <Controller
-                        name="name"
+                        name='name'
                         control={control}
-                        defaultValue=""
+                        defaultValue=''
                         rules={{
                           required: true,
                         }}
                         render={({ field }) => (
                           <TextField
-                            variant="outlined"
+                            variant='outlined'
                             fullWidth
-                            id="name"
-                            label="Name"
+                            id='name'
+                            label='Name'
                             error={Boolean(errors.name)}
                             helperText={errors.name ? 'Name is required' : ''}
                             {...field}
@@ -185,22 +185,22 @@ function UserEdit({ params }) {
                     </ListItem>
                     <ListItem>
                       <FormControlLabel
-                        label="Is Admin"
+                        label='Is Admin'
                         control={
                           <Checkbox
                             onClick={(e) => setIsAdmin(e.target.checked)}
                             checked={isAdmin}
-                            name="isAdmin"
+                            name='isAdmin'
                           />
                         }
                       ></FormControlLabel>
                     </ListItem>
                     <ListItem>
                       <Button
-                        variant="contained"
-                        type="submit"
+                        variant='contained'
+                        type='submit'
                         fullWidth
-                        color="primary"
+                        color='primary'
                       >
                         Update
                       </Button>
@@ -214,13 +214,13 @@ function UserEdit({ params }) {
         </Grid>
       </Grid>
     </Layout>
-  );
+  )
 }
 
 export async function getServerSideProps({ params }) {
   return {
     props: { params },
-  };
+  }
 }
 
-export default dynamic(() => Promise.resolve(UserEdit), { ssr: false });
+export default dynamic(() => Promise.resolve(UserEdit), { ssr: false })

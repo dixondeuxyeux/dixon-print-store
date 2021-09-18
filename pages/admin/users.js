@@ -1,8 +1,8 @@
-import axios from 'axios';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer } from 'react';
+import axios from 'axios'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
+import React, { useEffect, useContext, useReducer } from 'react'
 import {
   CircularProgress,
   Grid,
@@ -18,112 +18,112 @@ import {
   TableRow,
   TableCell,
   TableBody,
-} from '@material-ui/core';
-import { getError } from '../../utils/error';
-import { Store } from '../../utils/Store';
-import Layout from '../../components/Layout';
-import useStyles from '../../utils/styles';
-import { useSnackbar } from 'notistack';
+} from '@material-ui/core'
+import { getError } from '../../utils/error'
+import { Store } from '../../utils/Store'
+import Layout from '../../components/Layout'
+import useStyles from '../../utils/styles'
+import { useSnackbar } from 'notistack'
 
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      return { ...state, loading: true, error: '' };
+      return { ...state, loading: true, error: '' }
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, users: action.payload, error: '' };
+      return { ...state, loading: false, users: action.payload, error: '' }
     case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload }
 
     case 'DELETE_REQUEST':
-      return { ...state, loadingDelete: true };
+      return { ...state, loadingDelete: true }
     case 'DELETE_SUCCESS':
-      return { ...state, loadingDelete: false, successDelete: true };
+      return { ...state, loadingDelete: false, successDelete: true }
     case 'DELETE_FAIL':
-      return { ...state, loadingDelete: false };
+      return { ...state, loadingDelete: false }
     case 'DELETE_RESET':
-      return { ...state, loadingDelete: false, successDelete: false };
+      return { ...state, loadingDelete: false, successDelete: false }
     default:
-      state;
+      state
   }
 }
 
 function AdminUsers() {
-  const { state } = useContext(Store);
-  const router = useRouter();
-  const classes = useStyles();
-  const { userInfo } = state;
+  const { state } = useContext(Store)
+  const router = useRouter()
+  const classes = useStyles()
+  const { userInfo } = state
 
   const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
       users: [],
       error: '',
-    });
+    })
 
   useEffect(() => {
     if (!userInfo) {
-      router.push('/login');
+      router.push('/login')
     }
     const fetchData = async () => {
       try {
-        dispatch({ type: 'FETCH_REQUEST' });
+        dispatch({ type: 'FETCH_REQUEST' })
         const { data } = await axios.get(`/api/admin/users`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
-        });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        })
+        dispatch({ type: 'FETCH_SUCCESS', payload: data })
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
       }
-    };
-    if (successDelete) {
-      dispatch({ type: 'DELETE_RESET' });
-    } else {
-      fetchData();
     }
-  }, [successDelete]);
+    if (successDelete) {
+      dispatch({ type: 'DELETE_RESET' })
+    } else {
+      fetchData()
+    }
+  }, [successDelete])
 
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar()
 
   const deleteHandler = async (userId) => {
     if (!window.confirm('Are you sure?')) {
-      return;
+      return
     }
     try {
-      dispatch({ type: 'DELETE_REQUEST' });
+      dispatch({ type: 'DELETE_REQUEST' })
       await axios.delete(`/api/admin/users/${userId}`, {
         headers: { authorization: `Bearer ${userInfo.token}` },
-      });
-      dispatch({ type: 'DELETE_SUCCESS' });
-      enqueueSnackbar('User deleted successfully', { variant: 'success' });
+      })
+      dispatch({ type: 'DELETE_SUCCESS' })
+      enqueueSnackbar('User deleted successfully', { variant: 'success' })
     } catch (err) {
-      dispatch({ type: 'DELETE_FAIL' });
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      dispatch({ type: 'DELETE_FAIL' })
+      enqueueSnackbar(getError(err), { variant: 'error' })
     }
-  };
+  }
   return (
-    <Layout title="Users">
+    <Layout title='Users'>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
+              <NextLink href='/admin/dashboard' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Admin Dashboard'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
+              <NextLink href='/admin/orders' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Orders'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Products"></ListItemText>
+              <NextLink href='/admin/products' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Products'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/users" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Users"></ListItemText>
+              <NextLink href='/admin/users' passHref>
+                <ListItem selected button component='a'>
+                  <ListItemText primary='Users'></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -133,7 +133,7 @@ function AdminUsers() {
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h1" variant="h1">
+                <Typography component='h1' variant='h1'>
                   Users
                 </Typography>
                 {loadingDelete && <CircularProgress />}
@@ -168,14 +168,14 @@ function AdminUsers() {
                                 href={`/admin/user/${user._id}`}
                                 passHref
                               >
-                                <Button size="small" variant="contained">
+                                <Button size='small' variant='contained'>
                                   Edit
                                 </Button>
                               </NextLink>{' '}
                               <Button
                                 onClick={() => deleteHandler(user._id)}
-                                size="small"
-                                variant="contained"
+                                size='small'
+                                variant='contained'
                               >
                                 Delete
                               </Button>
@@ -192,7 +192,7 @@ function AdminUsers() {
         </Grid>
       </Grid>
     </Layout>
-  );
+  )
 }
 
-export default dynamic(() => Promise.resolve(AdminUsers), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminUsers), { ssr: false })

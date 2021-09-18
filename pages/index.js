@@ -42,7 +42,6 @@ export default function Home(props) {
                 src={product.featuredImage}
                 alt={product.name}
                 className={classes.featuredImage}
-                // layout='responsive'
               ></img>
             </Link>
           </NextLink>

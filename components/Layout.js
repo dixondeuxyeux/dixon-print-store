@@ -27,6 +27,7 @@ import {
   InputBase,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import CancelIcon from '@material-ui/icons/Cancel'
 import SearchIcon from '@material-ui/icons/Search'
 import useStyles from '../utils/styles'
@@ -152,7 +153,7 @@ export default function Layout({ title, description, children }) {
                 onClick={sidebarOpenHandler}
                 className={classes.menuButton}
               >
-                <MenuIcon className={classes.navbarButton} />
+                <MenuIcon className={classes.navbarButton2} />
               </IconButton>
               <NextLink href='/' passHref>
                 <Link>
@@ -238,10 +239,10 @@ export default function Layout({ title, description, children }) {
                         color='primary'
                         badgeContent={cart.cartItems.length}
                       >
-                        Cart
+                        <ShoppingCartIcon />
                       </Badge>
                     ) : (
-                      'Cart'
+                      <ShoppingCartIcon color='primary' className={classes.lower2}/>
                     )}
                   </Typography>
                 </Link>

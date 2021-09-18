@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   lower2: {
     paddingTop: 1,
+    marginBottom: -6,
     // paddingRight: 10,
     // marginLeft: 10,
   },
@@ -49,6 +50,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     // marginBottom: 1,
     textTransform: 'initial',
+  },
+  navbarButton2: {
+    color: '#ffffff',
+    fontSize: 32,
+    marginBottom: 5,
+    textTransform: 'initial',
+  },
+  featuredImage: {
+    maxWidth: '100%',
   },
 
   transparentBackground: {
@@ -118,8 +128,6 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
-  
 }))
-
 
 export default useStyles

@@ -1,8 +1,8 @@
-import axios from 'axios';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer } from 'react';
+import axios from 'axios'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
+import React, { useEffect, useContext, useReducer } from 'react'
 import {
   CircularProgress,
   Grid,
@@ -18,78 +18,78 @@ import {
   TableRow,
   TableCell,
   TableBody,
-} from '@material-ui/core';
-import { getError } from '../../utils/error';
-import { Store } from '../../utils/Store';
-import Layout from '../../components/Layout';
-import useStyles from '../../utils/styles';
+} from '@material-ui/core'
+import { getError } from '../../utils/error'
+import { Store } from '../../utils/Store'
+import Layout from '../../components/Layout'
+import useStyles from '../../utils/styles'
 
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      return { ...state, loading: true, error: '' };
+      return { ...state, loading: true, error: '' }
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, orders: action.payload, error: '' };
+      return { ...state, loading: false, orders: action.payload, error: '' }
     case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload }
     default:
-      state;
+      state
   }
 }
 
 function AdminOrders() {
-  const { state } = useContext(Store);
-  const router = useRouter();
-  const classes = useStyles();
-  const { userInfo } = state;
+  const { state } = useContext(Store)
+  const router = useRouter()
+  const classes = useStyles()
+  const { userInfo } = state
 
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     orders: [],
     error: '',
-  });
+  })
 
   useEffect(() => {
     if (!userInfo) {
-      router.push('/login');
+      router.push('/login')
     }
     const fetchData = async () => {
       try {
-        dispatch({ type: 'FETCH_REQUEST' });
+        dispatch({ type: 'FETCH_REQUEST' })
         const { data } = await axios.get(`/api/admin/orders`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
-        });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        })
+        dispatch({ type: 'FETCH_SUCCESS', payload: data })
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
       }
-    };
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
   return (
-    <Layout title="Orders">
+    <Layout title='Orders'>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
+              <NextLink href='/admin/dashboard' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Admin Dashboard'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
+              <NextLink href='/admin/orders' passHref>
+                <ListItem selected button component='a'>
+                  <ListItemText primary='Orders'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Products"></ListItemText>
+              <NextLink href='/admin/products' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Products'></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/admin/users" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Users"></ListItemText>
+              <NextLink href='/admin/users' passHref>
+                <ListItem button component='a'>
+                  <ListItemText primary='Users'></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -99,7 +99,7 @@ function AdminOrders() {
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h1" variant="h1">
+                <Typography component='h1' variant='h1'>
                   Orders
                 </Typography>
               </ListItem>
@@ -144,7 +144,7 @@ function AdminOrders() {
                             </TableCell>
                             <TableCell>
                               <NextLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
+                                <Button variant='contained'>Details</Button>
                               </NextLink>
                             </TableCell>
                           </TableRow>
@@ -159,7 +159,7 @@ function AdminOrders() {
         </Grid>
       </Grid>
     </Layout>
-  );
+  )
 }
 
-export default dynamic(() => Promise.resolve(AdminOrders), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminOrders), { ssr: false })

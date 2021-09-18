@@ -338,9 +338,7 @@ function ProductEdit({ params }) {
                             id='image'
                             label='Image'
                             error={Boolean(errors.image)}
-                            helperText={
-                              errors.image ?  'Image is required' : ''
-                            }
+                            helperText={errors.image ? 'Image is required' : ''}
                             {...field}
                           ></TextField>
                         )}
