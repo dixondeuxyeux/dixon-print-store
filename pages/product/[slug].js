@@ -91,7 +91,7 @@ export default function ProductScreen(props) {
       <div className={classes.section}>
         <NextLink href='/' passHref>
           <Link>
-            <Typography> back to products</Typography>
+            <Typography> Back to Photographs</Typography>
           </Link>
         </NextLink>
       </div>
