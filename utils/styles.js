@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     fontSize: 32,
     marginBottom: 5,
+    marginLeft: 10,
     textTransform: 'initial',
   },
   featuredImage: {
