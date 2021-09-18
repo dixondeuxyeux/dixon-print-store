@@ -1,3 +1,4 @@
+// /api/products/:id/reviews
 import mongoose from 'mongoose'
 import nextConnect from 'next-connect'
 import { onError } from '../../../../utils/error'
@@ -52,6 +53,7 @@ handler.use(isAuth).post(async (req, res) => {
         rating: Number(req.body.rating),
         comment: req.body.comment,
       }
+
       product.reviews.push(review)
       product.numReviews = product.reviews.length
       product.rating =
