@@ -262,6 +262,7 @@ function Order({ params }) {
                         <TableRow>
                           <TableCell>Image</TableCell>
                           <TableCell>Name</TableCell>
+                          {/* <TableCell>Surface</TableCell> */}
                           <TableCell align='right'>Quantity</TableCell>
                           <TableCell align='right'>Price</TableCell>
                         </TableRow>
@@ -290,8 +291,11 @@ function Order({ params }) {
                               </NextLink>
                             </TableCell>
                             <TableCell align='right'>
-                              <Typography>{item.quantity}</Typography>
+                              <Typography>{item.surface}</Typography>
                             </TableCell>
+                            {/* <TableCell align='right'>
+                              <Typography>{item.quantity}</Typography>
+                            </TableCell> */}
                             <TableCell align='right'>
                               <Typography>${item.price}</Typography>
                             </TableCell>

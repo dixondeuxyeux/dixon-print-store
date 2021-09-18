@@ -55,6 +55,11 @@ export default function Layout({ title, description, children }) {
         fontWeight: 400,
         margin: '1rem 0',
       },
+      h4: {
+        fontSize: '1.8rem',
+        fontWeight: 400,
+        margin: '1rem 0',
+      },
       a: {
         fontWeight: 400,
         margin: '1rem 0',
@@ -242,7 +247,10 @@ export default function Layout({ title, description, children }) {
                         <ShoppingCartIcon />
                       </Badge>
                     ) : (
-                      <ShoppingCartIcon color='primary' className={classes.lower2}/>
+                      <ShoppingCartIcon
+                        color='primary'
+                        className={classes.lower2}
+                      />
                     )}
                   </Typography>
                 </Link>

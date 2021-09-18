@@ -66,6 +66,7 @@ function CartScreen() {
                     <TableCell>Image</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell align='right'>Quantity</TableCell>
+                    <TableCell align='right'>Surface</TableCell>
                     <TableCell align='right'>Price</TableCell>
                     <TableCell align='right'>Action</TableCell>
                   </TableRow>
@@ -107,6 +108,7 @@ function CartScreen() {
                           ))}
                         </Select>
                       </TableCell>
+                      <TableCell align='right'>{item.surface}</TableCell>
                       <TableCell align='right'>${item.price}</TableCell>
                       <TableCell align='right'>
                         <Button
