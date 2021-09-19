@@ -402,4 +402,5 @@ export async function getServerSideProps({ params }) {
   return { props: { params } }
 }
 
+// eslint-disable-next-line no-undef
 export default dynamic(() => Promise.resolve(Order), { ssr: false })
