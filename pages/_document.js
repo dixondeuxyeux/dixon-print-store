@@ -11,6 +11,12 @@ export default class MyDocument extends Document {
             name='description'
             content='The Print Store of DixonDeuxYeux Photographie, New York, Dakar, Addis Ababa, Paris'
           ></meta>
+          <meta
+            name='keywords'
+            content='DixonDeuxYeux, Photographie, Africa, African-American, New York,
+Brooklyn Kings, bikers, NFL, UNICEF, United Way, Ford Foundation,
+Ethiopia, Senegal, Sénégal, Dakar'
+          ></meta>
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
