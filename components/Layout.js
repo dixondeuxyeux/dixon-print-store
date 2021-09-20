@@ -76,7 +76,7 @@ export default function Layout({ title, description, children }) {
       },
       secondary: {
         light: '#ee4f10',
-        main: '#da4712',
+        main: '#ee1a0b',
       },
     },
   })
