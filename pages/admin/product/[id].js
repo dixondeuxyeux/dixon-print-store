@@ -277,9 +277,11 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
+
                     <ListItem>
                       <Controller
-                        name='image'
+                        name='featuredImage'
                         control={control}
                         defaultValue=''
                         rules={{
@@ -289,10 +291,12 @@ function ProductEdit({ params }) {
                           <TextField
                             variant='outlined'
                             fullWidth
-                            id='image'
-                            label='Image'
-                            error={Boolean(errors.image)}
-                            helperText={errors.image ? 'Image is required' : ''}
+                            id='featuredImage'
+                            label='Featured Image'
+                            error={Boolean(errors.featuredImage)}
+                            helperText={
+                              errors.image ? 'Featured Image is required' : ''
+                            }
                             {...field}
                           ></TextField>
                         )}
@@ -317,9 +321,10 @@ function ProductEdit({ params }) {
                         }
                       ></FormControlLabel>
                     </ListItem>
+                    
                     <ListItem>
                       <Controller
-                        name='featuredImage'
+                        name='image'
                         control={control}
                         defaultValue=''
                         rules={{
@@ -329,12 +334,10 @@ function ProductEdit({ params }) {
                           <TextField
                             variant='outlined'
                             fullWidth
-                            id='featuredImage'
-                            label='Featured Image'
+                            id='image'
+                            label=' Image'
                             error={Boolean(errors.image)}
-                            helperText={
-                              errors.image ? 'Featured Image is required' : ''
-                            }
+                            helperText={errors.image ? 'Image is required' : ''}
                             {...field}
                           ></TextField>
                         )}
