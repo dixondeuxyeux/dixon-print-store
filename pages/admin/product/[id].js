@@ -90,8 +90,8 @@ function ProductEdit({ params }) {
           setValue('featuredImage', data.featuredImage)
           setIsFeatured(data.isFeatured)
           setValue('category', data.category)
-          setValue('rating', data.rating)
           setValue('surface', data.surface)
+          setValue('rating', data.rating)
           setValue('countInStock', data.countInStock)
           setValue('description', data.description)
         } catch (err) {
@@ -144,10 +144,10 @@ function ProductEdit({ params }) {
           slug,
           price,
           category,
-          rating,
           image,
           isFeatured,
           featuredImage,
+          rating,
           surface,
           countInStock,
           description,
@@ -277,52 +277,6 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
-                    <FormControlLabel
-                      label='isFeatured'
-                      control={
-                        <Checkbox
-                          onClick={(e) => setIsFeatured(e.target.checked)}
-                          checked={isFeatured}
-                          name='isFeatured'
-                        />
-                      }
-                    ></FormControlLabel>
-                    <ListItem>
-                      <Controller
-                        name='featuredImage'
-                        control={control}
-                        defaultValue=''
-                        rules={{
-                          required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant='outlined'
-                            fullWidth
-                            id='featuredImage'
-                            label='Featured Image'
-                            error={Boolean(errors.featuredImage)}
-                            helperText={
-                              errors.featuredImage
-                                ? 'Featured Image is required'
-                                : ''
-                            }
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Button variant='contained' component='label'>
-                        Upload File
-                        <input
-                          type='file'
-                          onChange={(e) => uploadHandler(e, 'featuredImage')}
-                          hidden
-                        />
-                      </Button>
-                      {loadingUpload && <CircularProgress />}
-                    </ListItem>
                     <ListItem>
                       <Controller
                         name='image'
@@ -339,6 +293,48 @@ function ProductEdit({ params }) {
                             label='Image'
                             error={Boolean(errors.image)}
                             helperText={errors.image ? 'Image is required' : ''}
+                            {...field}
+                          ></TextField>
+                        )}
+                      ></Controller>
+                    </ListItem>
+                    <ListItem>
+                      <Button variant='contained' component='label'>
+                        Upload File
+                        <input type='file' onChange={uploadHandler} hidden />
+                      </Button>
+                      {loadingUpload && <CircularProgress />}
+                    </ListItem>
+                    <ListItem>
+                      <FormControlLabel
+                        label='Is Featured'
+                        control={
+                          <Checkbox
+                            onClick={(e) => setIsFeatured(e.target.checked)}
+                            checked={isFeatured}
+                            name='isFeatured'
+                          />
+                        }
+                      ></FormControlLabel>
+                    </ListItem>
+                    <ListItem>
+                      <Controller
+                        name='featuredImage'
+                        control={control}
+                        defaultValue=''
+                        rules={{
+                          required: true,
+                        }}
+                        render={({ field }) => (
+                          <TextField
+                            variant='outlined'
+                            fullWidth
+                            id='featuredImage'
+                            label='Featured Image'
+                            error={Boolean(errors.image)}
+                            helperText={
+                              errors.image ? 'Featured Image is required' : ''
+                            }
                             {...field}
                           ></TextField>
                         )}
