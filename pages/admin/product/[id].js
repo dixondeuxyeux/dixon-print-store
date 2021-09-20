@@ -67,6 +67,7 @@ function ProductEdit({ params }) {
     formState: { errors },
     setValue,
   } = useForm()
+
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const router = useRouter()
   const classes = useStyles()
@@ -90,8 +91,8 @@ function ProductEdit({ params }) {
           setValue('featuredImage', data.featuredImage)
           setIsFeatured(data.isFeatured)
           setValue('category', data.category)
-          setValue('surface', data.surface)
           setValue('rating', data.rating)
+          setValue('surface', data.surface)
           setValue('countInStock', data.countInStock)
           setValue('description', data.description)
         } catch (err) {
@@ -101,6 +102,7 @@ function ProductEdit({ params }) {
       fetchData()
     }
   }, [])
+
   const uploadHandler = async (e, imageField = 'image') => {
     const file = e.target.files[0]
     const bodyFormData = new FormData()
@@ -121,7 +123,6 @@ function ProductEdit({ params }) {
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
   }
-
   const submitHandler = async ({
     name,
     slug,
@@ -135,6 +136,7 @@ function ProductEdit({ params }) {
     description,
   }) => {
     closeSnackbar()
+
     try {
       dispatch({ type: 'UPDATE_REQUEST' })
       await axios.put(
@@ -144,10 +146,10 @@ function ProductEdit({ params }) {
           slug,
           price,
           category,
+          rating,
           image,
           isFeatured,
           featuredImage,
-          rating,
           surface,
           countInStock,
           description,
@@ -162,9 +164,7 @@ function ProductEdit({ params }) {
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
   }
-
   const [isFeatured, setIsFeatured] = useState(false)
-
   return (
     <Layout title={`Edit Product ${productId}`}>
       <Grid container spacing={1}>
@@ -235,6 +235,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='slug'
@@ -256,6 +257,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='price'
@@ -278,10 +280,9 @@ function ProductEdit({ params }) {
                       ></Controller>
                     </ListItem>
 
-
                     <ListItem>
                       <Controller
-                        name='featuredImage'
+                        name='image'
                         control={control}
                         defaultValue=''
                         rules={{
@@ -293,7 +294,7 @@ function ProductEdit({ params }) {
                             fullWidth
                             id='featuredImage'
                             label='Featured Image'
-                            error={Boolean(errors.featuredImage)}
+                            error={Boolean(errors.image)}
                             helperText={
                               errors.image ? 'Featured Image is required' : ''
                             }
@@ -321,7 +322,6 @@ function ProductEdit({ params }) {
                         }
                       ></FormControlLabel>
                     </ListItem>
-                    
                     <ListItem>
                       <Controller
                         name='image'
@@ -335,7 +335,7 @@ function ProductEdit({ params }) {
                             variant='outlined'
                             fullWidth
                             id='image'
-                            label=' Image'
+                            label='Image'
                             error={Boolean(errors.image)}
                             helperText={errors.image ? 'Image is required' : ''}
                             {...field}
@@ -348,7 +348,7 @@ function ProductEdit({ params }) {
                         Upload File
                         <input
                           type='file'
-                          onChange={(e) => uploadHandler(e, 'featuredImage')}
+                          onChange={(e) => uploadHandler(e, 'image')}
                           hidden
                         />
                       </Button>
@@ -377,6 +377,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='rating'
@@ -400,6 +401,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='surface'
@@ -423,6 +425,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='countInStock'
@@ -436,7 +439,7 @@ function ProductEdit({ params }) {
                             variant='outlined'
                             fullWidth
                             id='countInStock'
-                            label='Count in stock'
+                            label='Count in stock '
                             error={Boolean(errors.countInStock)}
                             helperText={
                               errors.countInStock
@@ -448,6 +451,7 @@ function ProductEdit({ params }) {
                         )}
                       ></Controller>
                     </ListItem>
+
                     <ListItem>
                       <Controller
                         name='description'
