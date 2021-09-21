@@ -171,6 +171,11 @@ export default function Layout({ title, description, children }) {
                   />
                 </Link>
               </NextLink>
+              <NextLink href='/about' passHref>
+                <Link >
+                  <Typography className={classes.h4}>About the Archives</Typography>
+                </Link>
+              </NextLink>
             </Box>
             <Drawer
               anchor='left'
@@ -229,11 +234,13 @@ export default function Layout({ title, description, children }) {
                 </IconButton>
               </form>
             </div>
+            
             <div>
               <Switch
                 checked={darkMode}
                 onChange={darkModeChangeHandler}
               ></Switch>
+              
               <NextLink href='/cart' passHref>
                 <Link>
                   <Typography component='span'>
@@ -305,7 +312,9 @@ export default function Layout({ title, description, children }) {
                 </NextLink>
               )}
             </div>
+            
           </Toolbar>
+          
         </AppBar>
         <Container className={classes.main}>{children}</Container>
         <footer className={classes.footer}>
