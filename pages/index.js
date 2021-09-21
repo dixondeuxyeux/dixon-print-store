@@ -47,7 +47,7 @@ export default function Home(props) {
           </NextLink>
         ))}
       </Carousel>
-      <Typography variant='h1'>Popular Products</Typography>
+      <Typography variant='h1'>Popular Photographs</Typography>
       <Grid container spacing={3}>
         {topRatedProducts.map((product) => (
           <Grid item md={4} key={product.name}>
@@ -61,7 +61,6 @@ export default function Home(props) {
     </Layout>
   )
 }
-
 
 export async function getServerSideProps() {
   await db.connect()
