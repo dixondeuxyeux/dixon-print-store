@@ -91,7 +91,6 @@ function ProductEdit({ params }) {
           setValue('featuredImage', data.featuredImage)
           setIsFeatured(data.isFeatured)
           setValue('category', data.category)
-          setValue('rating', data.rating)
           setValue('surface', data.surface)
           setValue('countInStock', data.countInStock)
           setValue('description', data.description)
@@ -128,7 +127,6 @@ function ProductEdit({ params }) {
     slug,
     price,
     category,
-    rating,
     image,
     featuredImage,
     surface,
@@ -146,7 +144,6 @@ function ProductEdit({ params }) {
           slug,
           price,
           category,
-          rating,
           image,
           isFeatured,
           featuredImage,
@@ -292,12 +289,10 @@ function ProductEdit({ params }) {
                           <TextField
                             variant='outlined'
                             fullWidth
-                            id='featuredImage'
-                            label='Featured Image'
+                            id='image'
+                            label='Image'
                             error={Boolean(errors.image)}
-                            helperText={
-                              errors.image ? 'Featured Image is required' : ''
-                            }
+                            helperText={errors.image ? 'Image is required' : ''}
                             {...field}
                           ></TextField>
                         )}
@@ -324,7 +319,7 @@ function ProductEdit({ params }) {
                     </ListItem>
                     <ListItem>
                       <Controller
-                        name='image'
+                        name='featuredImage'
                         control={control}
                         defaultValue=''
                         rules={{
@@ -334,10 +329,12 @@ function ProductEdit({ params }) {
                           <TextField
                             variant='outlined'
                             fullWidth
-                            id='image'
-                            label='Image'
+                            id='featuredImage'
+                            label='Featured Image'
                             error={Boolean(errors.image)}
-                            helperText={errors.image ? 'Image is required' : ''}
+                            helperText={
+                              errors.image ? 'Featured Image is required' : ''
+                            }
                             {...field}
                           ></TextField>
                         )}
@@ -348,7 +345,7 @@ function ProductEdit({ params }) {
                         Upload File
                         <input
                           type='file'
-                          onChange={(e) => uploadHandler(e, 'image')}
+                          onChange={(e) => uploadHandler(e, 'featuredImage')}
                           hidden
                         />
                       </Button>
@@ -371,30 +368,6 @@ function ProductEdit({ params }) {
                             error={Boolean(errors.category)}
                             helperText={
                               errors.category ? 'Category is required' : ''
-                            }
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-
-                    <ListItem>
-                      <Controller
-                        name='rating'
-                        control={control}
-                        defaultValue=''
-                        rules={{
-                          required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant='outlined'
-                            fullWidth
-                            id='rating'
-                            label='Rating'
-                            error={Boolean(errors.rating)}
-                            helperText={
-                              errors.category ? 'Rating is required' : ''
                             }
                             {...field}
                           ></TextField>
