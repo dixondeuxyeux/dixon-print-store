@@ -158,6 +158,9 @@ function PlaceOrder() {
                               </Link>
                             </NextLink>
                           </TableCell>
+                          {/* <TableCell align='right'>
+                            <Typography>{item.surface}</Typography>
+                          </TableCell> */}
                           <TableCell align='right'>
                             <Typography>{item.quantity}</Typography>
                           </TableCell>

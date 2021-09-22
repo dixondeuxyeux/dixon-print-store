@@ -290,12 +290,12 @@ function Order({ params }) {
                                 </Link>
                               </NextLink>
                             </TableCell>
-                            <TableCell align='right'>
-                              <Typography>{item.surface}</Typography>
-                            </TableCell>
                             {/* <TableCell align='right'>
-                              <Typography>{item.quantity}</Typography>
+                              <Typography>{item.surface}</Typography>
                             </TableCell> */}
+                            <TableCell align='right'>
+                              <Typography>{item.quantity}</Typography>
+                            </TableCell>
                             <TableCell align='right'>
                               <Typography>${item.price}</Typography>
                             </TableCell>
