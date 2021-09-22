@@ -67,7 +67,7 @@ export default function ProductScreen(props) {
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
   }
-  
+
   useEffect(() => {
     fetchReviews()
   }, [])
