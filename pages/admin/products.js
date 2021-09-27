@@ -215,7 +215,11 @@ function AdminProdcuts() {
                                 href={`/admin/product/${product._id}`}
                                 passHref
                               >
-                                <Button size='small'  color='primary' variant='contained'>
+                                <Button
+                                  size='small'
+                                  color='primary'
+                                  variant='contained'
+                                >
                                   Edit
                                 </Button>
                               </NextLink>{' '}
