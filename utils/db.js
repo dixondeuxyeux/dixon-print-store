@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const connection = {}
 
-async function connect() {
+function connect() {
   if (connection.isConnected) {
     console.log('already connected')
     return
@@ -13,9 +13,9 @@ async function connect() {
       console.log('use previous connection')
       return
     }
-    await mongoose.disconnect()
+     mongoose.disconnect()
   }
-  const db = await mongoose.connect(process.env.MONGODB_URI, {
+  const db = mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
